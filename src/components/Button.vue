@@ -15,10 +15,11 @@ export default {
 <style scoped>
 .button{
   padding: 20px 50px;
-  background: #CD3F3E;
+  background: #A32A29;
   color: white;
   font-size: 120%;
   border-radius: 3px;
   border: none;
 }
+
 </style>

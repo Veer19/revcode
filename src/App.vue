@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <br>
-    <br>
-    <br>
     <router-view/>
   </div>
 </template>
@@ -17,7 +14,23 @@ body , html {
   text-align: center;
   color: whitesmoke;
   background: black;
+}
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
+    background-color: black;
+}
 
+::-webkit-scrollbar
+{
+    width: 3px;
+    height: 3px;
+    background-color: black;
+}
+
+::-webkit-scrollbar-thumb
+{
+    background-color: #A32A29;
 }
 #nav {
   padding: 30px;

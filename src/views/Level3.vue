@@ -2,7 +2,7 @@
 <div class="container">
     <div class="columns">
         <h1 class="title">
-            LEVEL 1
+            LEVEL 3
         </h1>
     </div>
     <!-- <div class="column">
@@ -10,16 +10,7 @@
     </div> -->
     <div class="columns questionContainer">  
       <div class="column">
-        <QuestionCard v-if="!userData.level1.q1" :question = question1 />
-        <AnsweredCard v-if="userData.level1.q1"/>
-      </div>
-      <div class="column">
-        <QuestionCard v-if="!userData.level1.q2" :question = question2 />
-        <AnsweredCard v-if="userData.level1.q2"/>
-      </div>
-      <div class="column">
-        <QuestionCard v-if="!userData.level1.q3" :question = question3 />
-        <AnsweredCard v-if="userData.level1.q3"/>
+        <QuestionCard v-if="!userData.level3.finalQuestion" :question = finalQuestion />
       </div>
     </div>
 </div>
@@ -35,17 +26,9 @@ export default {
     data : function(){
         return {
             userData : {},
-            question1 : {
-                number:"Question 1",
+            finalQuestion : {
+                number:"Final Question",
                 instruction : "STUFF1"
-            },
-            question2 : {
-                number:"Question 2",
-                instruction : "STUFF2"
-            },
-            question3 : {
-                number:"Question 3",
-                instruction : "STUFF3"
             },
             ladderImage:ladderImage
         }
@@ -55,12 +38,13 @@ export default {
         console.log(uid)
         firebaseApp.db.doc('users/'+uid).onSnapshot(snapshot=>{
             this.userData = snapshot.data()
-            if(this.userData.level1.q1 && this.userData.level1.q2 && this.userData.level1.q3){
-                this.$router.push('level2')
+            console.log(this.userData.level3)
+            if(this.userData.level3.finalQuestion){
+                this.$router.push('finish')
             }
         })
     },
-    name: 'level1',
+    name: 'level3',
     components: {
         QuestionCard,
         AnsweredCard

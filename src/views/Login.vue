@@ -1,10 +1,9 @@
-<template>
+<template class='background'>
 <div class="columns">
   <div class="column">
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <Button class="button" @click.native="login" text="Login"></Button>
   </div>
-  <h1 @click="login">HEy</h1>
   
 </div>
 
@@ -24,21 +23,28 @@ export default {
       firebaseApp.auth.signInWithPopup(provider)
       .then(snapshot=>{
         let user = snapshot.user
-        return firebaseApp.db.doc("users/"+ user.uid).set({
-          name : user.displayName,
-          level1 : {
-            q1:false,
-            q2:false,
-            q3:false
-          },
-          level2 : {
-            q1:false,
-            q2:false
-          },
-          level3 : {
-            q1:false
+        localStorage.setItem('uid',user.uid)
+        return firebaseApp.db.doc("users/"+user.uid).get()
+        .then(doc => {
+          if(!doc.exists){
+            return firebaseApp.db.doc("users/"+ user.uid).set({
+              name : user.displayName,
+              level1 : {
+                q1:false,
+                q2:false,
+                q3:false
+              },
+              level2 : {
+                q1:false,
+                q2:false
+              },
+              level3 : {
+                finalQuestion:false
+              }
+            })
           }
         })
+        
       })
       .then(()=>{
           this.$router.push('home')
@@ -48,3 +54,13 @@ export default {
 }
 
 </script>
+<style scoped>
+.columns {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  background: url('../assets/bg.jpg');
+  background-size: cover;
+  background-position: center;
+}
+</style>

@@ -2,7 +2,7 @@
 <div class="container">
     <div class="columns">
         <h1 class="title">
-            LEVEL 1
+            LEVEL 2
         </h1>
     </div>
     <!-- <div class="column">
@@ -10,16 +10,12 @@
     </div> -->
     <div class="columns questionContainer">  
       <div class="column">
-        <QuestionCard v-if="!userData.level1.q1" :question = question1 />
-        <AnsweredCard v-if="userData.level1.q1"/>
+        <QuestionCard v-if="!userData.level2.q1" :question = question1 />
+        <AnsweredCard v-if="userData.level2.q1"/>
       </div>
       <div class="column">
-        <QuestionCard v-if="!userData.level1.q2" :question = question2 />
-        <AnsweredCard v-if="userData.level1.q2"/>
-      </div>
-      <div class="column">
-        <QuestionCard v-if="!userData.level1.q3" :question = question3 />
-        <AnsweredCard v-if="userData.level1.q3"/>
+        <QuestionCard v-if="!userData.level2.q2" :question = question2 />
+        <AnsweredCard v-if="userData.level2.q2"/>
       </div>
     </div>
 </div>
@@ -43,10 +39,6 @@ export default {
                 number:"Question 2",
                 instruction : "STUFF2"
             },
-            question3 : {
-                number:"Question 3",
-                instruction : "STUFF3"
-            },
             ladderImage:ladderImage
         }
     },
@@ -55,12 +47,12 @@ export default {
         console.log(uid)
         firebaseApp.db.doc('users/'+uid).onSnapshot(snapshot=>{
             this.userData = snapshot.data()
-            if(this.userData.level1.q1 && this.userData.level1.q2 && this.userData.level1.q3){
-                this.$router.push('level2')
+            if(this.userData.level2.q1 || this.userData.level2.q2){
+                this.$router.push('level3')
             }
         })
     },
-    name: 'level1',
+    name: 'level2',
     components: {
         QuestionCard,
         AnsweredCard

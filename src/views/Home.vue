@@ -55,7 +55,7 @@ export default {
     background: #1d1d1d;
     width: 100%;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-    color: #CD3F3E;
+    color: #A32A29;
     font-size: 70px;
 }
 .container{
