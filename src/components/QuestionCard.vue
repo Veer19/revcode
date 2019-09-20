@@ -65,7 +65,7 @@ export default {
         }
         return answer;
       } else {
-        return "Enter a valid number between 0 and 10000";
+        return "Enter a valid number between 0 and 1000";
       }
     },
     outputFunction3() {
