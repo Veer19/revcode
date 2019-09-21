@@ -115,7 +115,7 @@ export default {
       console.log("4")
       //Level 2 Question 1: sum of divisors of number entered
       let n = this.inputValue 
-      if (isNaN(n) == false) {
+      if (isNaN(n) == false && parseInt(n)<=1000 && parseInt(n)>=0) {
         let sum = 0;
         for (let i = 1; i <= n; i++) {
             if (n % i == 0) {
@@ -125,7 +125,7 @@ export default {
         return (sum);
     }
     else {
-        return ("Enter a valid number");
+        return ("Enter a valid number between 0 and 1000");
     }
     },
     outputFunction5(){
@@ -167,10 +167,12 @@ export default {
       
       //CODE FOR QUESTION 6
       if(isNaN(a) && isNaN(b) && isNaN(c)){
-        return(a^b^c)
+        if(parseInt(a)<=10000 && parseInt(b)<=10000 && parseInt(c)<=10000 && parseInt(a)>=0 && parseInt(b)>= && parseInt(c)>=0){
+          return(parseInt(a)^parseInt(b)^parseInt(c))
+          }
       }
       else{
-        return("Enter valid numbers")
+        return("Enter valid numbers between 0 and 10000")
       }
     },
     getOutput(){
