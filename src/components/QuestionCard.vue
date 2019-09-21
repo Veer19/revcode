@@ -55,6 +55,7 @@ export default {
   },
   methods:{
    outputFunction1() {
+     console.log("1")
       //Level 1 Question 1: single digit representation of a positive number
       let n = this.inputValue;
       if (isNaN(n) == false && parseInt(n)>=0) {
@@ -72,6 +73,7 @@ export default {
       }
     },
     outputFunction2() {
+      console.log("2")
       //Level  1 Question 2: concatenation of powers of the number based on index ie 1234=12916;
       let n = this.inputValue;
       if (isNaN(n) == false && parseInt(n)<1000 && parseInt(n)>=0) {
@@ -86,6 +88,7 @@ export default {
       }
     },
     outputFunction3() {
+      console.log("3")
       //Level 1 Question 3 : count the number of occurances of the character in the string and display 
       let a = this.inputValue;
       if (isNaN(a) && /^[a-zA-Z]+$/.test(a)) {   
@@ -109,6 +112,7 @@ export default {
       }
     },
     outputFunction4(){
+      console.log("4")
       //Level 2 Question 1: sum of divisors of number entered
       let n = this.inputValue 
       if (isNaN(n) == false) {
@@ -125,7 +129,9 @@ export default {
     }
     },
     outputFunction5(){
+      console.log("5")
       //Level 2 Question 2: Shifting cipher ; shifts letter according to (-1**index)*(i+1)
+      let v;
       let a = this.inputValue
       if (isNaN(a) && /^[a-zA-Z]+$/.test(a)) {
         let pos_a = "A".charCodeAt(0);
@@ -153,7 +159,7 @@ export default {
     }
     },
     outputFunction6(){
-
+      console.log("6")
       //Final Question : Level 3 : return XOR of three inputs 
       let a = this.finalInput.inputValue1
       let b = this.finalInput.inputValue2
@@ -203,6 +209,7 @@ export default {
   border-left: none;
   border-bottom: 2px #A32A29 solid;
   color: whitesmoke;
+  width: 100%;
 }
 .button{
   border: none;

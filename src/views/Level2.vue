@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container is-fluid">
     <div class="columns">
         <h1 class="title">
             LEVEL 2
@@ -10,11 +10,11 @@
     </div> -->
     <div class="columns questionContainer">  
       <div class="column">
-        <QuestionCard v-if="!userData.level2.q1" :question = question1 />
+        <QuestionCard v-if="!userData.level2.q1" :question = question4 />
         <AnsweredCard v-if="userData.level2.q1"/>
       </div>
       <div class="column">
-        <QuestionCard v-if="!userData.level2.q2" :question = question2 />
+        <QuestionCard v-if="!userData.level2.q2" :question = question5 />
         <AnsweredCard v-if="userData.level2.q2"/>
       </div>
     </div>
@@ -31,13 +31,13 @@ export default {
     data : function(){
         return {
             userData : {},
-            question1 : {
-                number:"Question 1",
-                instruction : "STUFF1"
+            question4 : {
+                number:"Question 4",
+                instruction : "Enter a +ive Integer below 1000"
             },
-            question2 : {
-                number:"Question 2",
-                instruction : "STUFF2"
+            question5 : {
+                number:"Question 5",
+                instruction : "Enter a String"
             },
             ladderImage:ladderImage
         }

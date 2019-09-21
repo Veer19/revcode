@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container is-fluid">
     <div class="columns">
         <h1 class="title">
             LEVEL 1
@@ -37,15 +37,15 @@ export default {
             userData : {},
             question1 : {
                 number:"Question 1",
-                instruction : "STUFF1"
+                instruction : "Enter a +ive integer"
             },
             question2 : {
                 number:"Question 2",
-                instruction : "STUFF2"
+                instruction : "Enter a +ive below 1000"
             },
             question3 : {
                 number:"Question 3",
-                instruction : "STUFF3"
+                instruction : "Enter a String"
             },
             ladderImage:ladderImage
         }

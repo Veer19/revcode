@@ -28,7 +28,7 @@ export default {
             userData : {},
             finalQuestion : {
                 number:"Final Question",
-                instruction : "STUFF1"
+                instruction : "Enter a +ive Integer"
             },
             ladderImage:ladderImage
         }

@@ -6,7 +6,7 @@
        - This is a team event. There can be 1-2 members in a team.
 <br>
 <br>
-- Your team will be required to guess the problem with help of given input and output set and write program to solve the problems.
+- Your team will be required to decude the logic according to the output of your given inputs and write program to solve the problems.
 <br>
 <br>
 - Your programs can be written in any language.
