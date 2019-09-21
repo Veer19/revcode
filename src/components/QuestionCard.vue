@@ -111,7 +111,7 @@ export default {
     outputFunction4(){
       //Level 2 Question 1: sum of divisors of number entered
       let n = this.inputValue 
-      if (isNaN(n) == false && parseInt(n)<1000 && parseInt(n)>0) {
+      if (isNaN(n) == false && parseInt(n)<=1000 && parseInt(n)>=0) {
         let sum = 0;
         for (let i = 1; i <= n; i++) {
             if (n % i == 0) {
