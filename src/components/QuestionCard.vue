@@ -109,27 +109,63 @@ export default {
       }
     },
     outputFunction4(){
-      let input = this.inputValue
-      
-      //CODE FOR QUESTION 4
-      let answer = input
-      return answer
+      //Level 2 Question 1: sum of divisors of number entered
+      let n = this.inputValue 
+      if (isNaN(n) == false) {
+        let sum = 0;
+        for (let i = 1; i <= n; i++) {
+            if (n % i == 0) {
+                sum += i;
+            }
+        }
+        return (sum);
+    }
+    else {
+        return ("Enter a valid number");
+    }
     },
     outputFunction5(){
-      let input = this.inputValue
-      
-      //CODE FOR QUESTION 5
-      let answer = input
-      return answer
+      //Level 2 Question 2: Shifting cipher ; shifts letter according to (-1**index)*(i+1)
+      let a = this.inputValue
+      if (isNaN(a) && /^[a-zA-Z]+$/.test(a)) {
+        let pos_a = "A".charCodeAt(0);
+        let pos_z = "Z".charCodeAt(0);
+        let word = a.toUpperCase();
+        let ans = "";
+        for (let i = 0; i < word.length; i++) {
+            v = word[i].charCodeAt(0) + ((-1) ** i) * (i + 1);
+            if (v > pos_z) {
+                v = v % pos_z + pos_a;
+                ans += String.fromCharCode(v);
+            }
+            else if (v < pos_a) {
+                v = pos_z - (pos_a - v);
+                ans += String.fromCharCode(v);
+            }
+            else {
+                ans += String.fromCharCode(v);
+            }
+        }
+        return (ans);
+    }
+    else {
+        return ("Enter a valid string");
+    }
     },
     outputFunction6(){
-      let input1 = this.finalInput.inputValue1
-      let input2 = this.finalInput.inputValue2
-      let input3 = this.finalInput.inputValue3
+
+      //Final Question : Level 3 : return XOR of three inputs 
+      let a = this.finalInput.inputValue1
+      let b = this.finalInput.inputValue2
+      let c = this.finalInput.inputValue3
       
       //CODE FOR QUESTION 6
-      let answer = input1 + input2 + input3
-      return answer
+      if(isNaN(a) && isNaN(b) && isNaN(c)){
+        return(a^b^c)
+      }
+      else{
+        return("Enter valid numbers")
+      }
     },
     getOutput(){
       if(this.question.number == "Question 1")
