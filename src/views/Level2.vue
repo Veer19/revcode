@@ -10,12 +10,12 @@
     </div> -->
     <div class="columns questionContainer">  
       <div class="column">
-        <QuestionCard v-if="!userData.level2.q1" :question = question4 />
-        <AnsweredCard v-if="userData.level2.q1"/>
+        <QuestionCard v-if="!userData.questions['4']" :question = question4 />
+        <AnsweredCard v-if="userData.questions['4']"/>
       </div>
       <div class="column">
-        <QuestionCard v-if="!userData.level2.q2" :question = question5 />
-        <AnsweredCard v-if="userData.level2.q2"/>
+        <QuestionCard v-if="!userData.questions['4']" :question = question5 />
+        <AnsweredCard v-if="userData.questions['4']"/>
       </div>
     </div>
 </div>
@@ -33,7 +33,7 @@ export default {
             userData : {},
             question4 : {
                 number:"Question 4",
-                instruction : "Enter a +ive Integer below 1000"
+                instruction : "Enter a +ve Integer below 1000"
             },
             question5 : {
                 number:"Question 5",
@@ -47,7 +47,7 @@ export default {
         console.log(uid)
         firebaseApp.db.doc('users/'+uid).onSnapshot(snapshot=>{
             this.userData = snapshot.data()
-            if(this.userData.level2.q1 || this.userData.level2.q2){
+            if(this.userData.questions['4']){
                 this.$router.push('level3')
             }
         })

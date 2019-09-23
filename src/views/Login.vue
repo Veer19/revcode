@@ -29,18 +29,26 @@ export default {
           if(!doc.exists){
             return firebaseApp.db.doc("users/"+ user.uid).set({
               name : user.displayName,
-              level1 : {
-                q1:false,
-                q2:false,
-                q3:false
+              questions : {
+                '1':false,
+                '2':false,
+                '3':false,
+                '4':false,
+                '5':false,
               },
-              level2 : {
-                q1:false,
-                q2:false
+              points : {
+                '1l':false,
+                '2l':false,
+                '3l':false,
+                '4l':false,
+                '5l':false,
+                '1c':false,
+                '2c':false,
+                '3c':false,
+                '4c':false,
+                '5c':false,
               },
-              level3 : {
-                finalQuestion:false
-              }
+              uid:user.uid
             })
           }
         })

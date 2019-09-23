@@ -10,7 +10,7 @@
     </div> -->
     <div class="columns questionContainer">  
       <div class="column">
-        <QuestionCard v-if="!userData.level3.finalQuestion" :question = finalQuestion />
+        <QuestionCard v-if="!userData.questions['5']" :question = finalQuestion />
       </div>
     </div>
 </div>
@@ -28,18 +28,16 @@ export default {
             userData : {},
             finalQuestion : {
                 number:"Final Question",
-                instruction : "Enter a +ive Integer"
+                instruction : "Enter a +ve Integer"
             },
             ladderImage:ladderImage
         }
     },
     beforeMount(){
         let uid = localStorage.getItem('uid')
-        console.log(uid)
         firebaseApp.db.doc('users/'+uid).onSnapshot(snapshot=>{
             this.userData = snapshot.data()
-            console.log(this.userData.level3)
-            if(this.userData.level3.finalQuestion){
+            if(this.userData.questions['5']){
                 this.$router.push('finish')
             }
         })

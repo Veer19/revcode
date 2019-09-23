@@ -10,16 +10,16 @@
     </div> -->
     <div class="columns questionContainer">  
       <div class="column">
-        <QuestionCard v-if="!userData.level1.q1" :question = question1 />
-        <AnsweredCard v-if="userData.level1.q1"/>
+        <QuestionCard v-if="!userData.questions['1']" :question = question1 />
+        <AnsweredCard v-if="userData.questions['1']"/>
       </div>
       <div class="column">
-        <QuestionCard v-if="!userData.level1.q2" :question = question2 />
-        <AnsweredCard v-if="userData.level1.q2"/>
+        <QuestionCard v-if="!userData.questions['2']" :question = question2 />
+        <AnsweredCard v-if="userData.questions['2']"/>
       </div>
       <div class="column">
-        <QuestionCard v-if="!userData.level1.q3" :question = question3 />
-        <AnsweredCard v-if="userData.level1.q3"/>
+        <QuestionCard v-if="!userData.questions['3']" :question = question3 />
+        <AnsweredCard v-if="userData.questions['3']"/>
       </div>
     </div>
 </div>
@@ -37,11 +37,11 @@ export default {
             userData : {},
             question1 : {
                 number:"Question 1",
-                instruction : "Enter a +ive integer"
+                instruction : "Enter a +ve integer"
             },
             question2 : {
                 number:"Question 2",
-                instruction : "Enter a +ive below 1000"
+                instruction : "Enter a +ve below 1000"
             },
             question3 : {
                 number:"Question 3",
@@ -55,7 +55,7 @@ export default {
         console.log(uid)
         firebaseApp.db.doc('users/'+uid).onSnapshot(snapshot=>{
             this.userData = snapshot.data()
-            if(this.userData.level1.q1 && this.userData.level1.q2 && this.userData.level1.q3){
+            if(this.userData.questions['1'] && this.userData.questions['2'] && this.userData.questions['3']){
                 this.$router.push('level2')
             }
         })

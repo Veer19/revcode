@@ -14,7 +14,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .button{
-  padding: 20px 50px;
+  padding: 20px 30px;
   background: #A32A29;
   color: white;
   font-size: 120%;

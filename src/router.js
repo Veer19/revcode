@@ -6,6 +6,7 @@ import Level1 from './views/Level1.vue'
 import Level2 from './views/Level2.vue'
 import Level3 from './views/Level3.vue'
 import Finish from './views/Finish.vue'
+import Admin from './views/Admin.vue'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/finish',
       name: 'finish',
       component : Finish
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component : Admin
     }
   ]
 })

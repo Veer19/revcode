@@ -164,12 +164,15 @@ export default {
       let a = this.finalInput.inputValue1
       let b = this.finalInput.inputValue2
       let c = this.finalInput.inputValue3
-      
       //CODE FOR QUESTION 6
-      if(isNaN(a) && isNaN(b) && isNaN(c)){
-        if(parseInt(a)<=10000 && parseInt(b)<=10000 && parseInt(c)<=10000 && parseInt(a)>=0 && parseInt(b)>= && parseInt(c)>=0){
+      if(!isNaN(a) && !isNaN(b) && !isNaN(c)){
+
+        if(parseInt(a)<=10000 && parseInt(b)<=10000 && parseInt(c)<=10000 && parseInt(a)>=0 && parseInt(b)>=0 && parseInt(c)>=0){
           return(parseInt(a)^parseInt(b)^parseInt(c))
-          }
+        }
+        else{
+          return("Enter valid numbers between 0 and 10000")  
+        }
       }
       else{
         return("Enter valid numbers between 0 and 10000")
