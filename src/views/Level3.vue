@@ -2,7 +2,7 @@
 <div class="container">
     <div class="columns">
         <h1 class="title">
-            LEVEL 3
+            {{ this.userData.name }} : LEVEL 3
         </h1>
     </div>
     <!-- <div class="column">
@@ -37,6 +37,10 @@ export default {
         let uid = localStorage.getItem('uid')
         firebaseApp.db.doc('users/'+uid).onSnapshot(snapshot=>{
             this.userData = snapshot.data()
+            let questions = this.userData.questions
+            if(!questions['1'] || !questions['2'] || !questions['3'] || !questions['4']  ){
+                this.$router.push('level1')
+            }
             if(this.userData.questions['5']){
                 this.$router.push('finish')
             }

@@ -10,25 +10,26 @@
       </div>
     </div>
     
-    <div v-if="!loggedIn" class="container is-fluid">
+    <div v-if="loggedIn" class="container is-fluid">
+        <input class="inputField" type="text" v-model="search" placeholder="Search">
+        <br>
+        <br>
         <div class="columns is-multiline">
-            <div class="column userCard" v-for="user in users" v-bind:key="user.name" >
+            <div class="column userCard" v-for="user in filterItems(users)" v-bind:key="user.name" >
                 <div class="columns is-multiline" >
-                    <div class="column"><h1>{{user.name}}</h1></div>
+                    <div class="column is-two-thirds"><h1>{{user.name}}</h1></div>
                     <div class="column"><h1>{{user.pointNumber}}</h1></div>
                 </div>
                 <br>
-                <!-- LEVEL 1 -->
                 <div class="columns is-multiline" v-for="question in Object.keys(user.questions)" v-bind:key="question">
-                    <div class="column"><h2>Question {{question}}</h2></div>
+                    <div class="column is-half"><h2>Question {{question}}</h2></div>
                     <div class="column">
-                        <Button :text="user.points[question+'l']?'Remove Logic Points':'Add Logic Points'" @click.native="updatePoints(user.uid,question)"/>
+                        <div class="roundButton" @click="updatePoints(user.uid,question)">{{ user.points[question+'l']?'-':'+' }}</div>
                     </div>
                     <div class="column">
-                        <Button :text="user.questions[question] ? 'Remove Code Points' : 'Add Code Points'" @click.native="updateQuestions(user.uid,question)" />
+                        <div class="roundButton" @click="updateQuestions(user.uid,question)">{{ user.questions[question]?'-':'+' }}</div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -44,7 +45,8 @@ export default {
         return {
             adminPass:"",
             loggedIn:false,
-            users : []
+            users : [],
+            search:""
         }
     },
     components: {
@@ -80,7 +82,15 @@ export default {
                     points:points
                 })
             })
-        }
+        },
+        filterItems: function(users) {
+            var app = this;
+            console.log("STUFF")
+            return users.filter(function(user) {
+                let regex = new RegExp('(' + app.search + ')', 'i');
+                return user.name.match(regex);
+            })
+        },
     },
     beforeMount(){
         let scope = this;
@@ -164,6 +174,15 @@ export default {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     padding: 50px;
     text-align: left;
+}
+.roundButton {
+    font-size: 250%;
+    border-radius: 50%;
+    background: black;
+    padding: 20px;
+    display: inline-block;
+    cursor: pointer;
+    line-height: 16px;
 }
 .userCard h1 {
     color: #A32A29;

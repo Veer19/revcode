@@ -2,7 +2,7 @@
 <div class="container is-fluid">
     <div class="columns">
         <h1 class="title">
-            LEVEL 1
+            {{ this.userData.name }} : LEVEL 1
         </h1>
     </div>
     <!-- <div class="column">

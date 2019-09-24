@@ -22,7 +22,7 @@
       </div>
 <br>
 <br>
-      <Button text="START" @click.native="start" />
+      <Button v-if="startBool" text="START" @click.native="start" />
     </div>
     
   </div>
@@ -31,17 +31,28 @@
 <script>
 // @ is an alias to /src
 import Button from '@/components/Button.vue'
-
+import firebaseApp from '../firebaseConfig'
 export default {
   name: 'home',
   components: {
     Button
   },
+  data : function(){
+      return {
+        startBool:false
+      }
+  },
   methods:{
     start(){
       this.$router.push('level1')
     }
+  },
+  beforeMount(){
+    firebaseApp.db.doc("admin/controls").onSnapshot(snapshot=>{
+      this.startBool = snapshot.data().start
+    })
   }
+  
 }
 </script>
 <style scoped>

@@ -11,22 +11,24 @@
     </div>
     
     <div v-if="!loggedIn" class="container is-fluid">
+        <input class="inputField" type="text" v-model="search" placeholder="Search">
+        <br>
+        <br>
         <div class="columns is-multiline">
-            <div class="column userCard is-one-third" v-for="user in users" v-bind:key="user.name">
+            <div class="column userCard" v-for="user in filterItems(users)" v-bind:key="user.name" >
                 <div class="columns is-multiline" >
                     <div class="column"><h1>{{user.name}}</h1></div>
                     <div class="column"><h1>{{user.pointNumber}}</h1></div>
                 </div>
-                
                 <br>
                 <!-- LEVEL 1 -->
                 <div class="columns is-multiline" v-for="question in Object.keys(user.questions)" v-bind:key="question">
-                    <div class="column"><h2>Question {{question}}</h2></div>
+                    <div class="column is-half"><h2>Question {{question}}</h2></div>
                     <div class="column">
-                        <Button :text="user.points[question+'l']?'Remove Points':'Add Points'" @click.native="updatePoints(user.uid,question)"/>
+                        <div class="roundButton" @click="updatePoints(user.uid,question)">{{ user.points[question+'l']?'-':'+' }}</div>
                     </div>
                     <div class="column">
-                        <Button :text="user.questions[question] ? 'Mark Undone' : 'Mark Done'" @click.native="updateQuestions(user.uid,question)" />
+                        <div class="roundButton" @click="updateQuestions(user.uid,question)">{{ user.questions[question+'l']?'-':'+' }}</div>
                     </div>
                 </div>
 
@@ -45,7 +47,8 @@ export default {
         return {
             adminPass:"",
             loggedIn:false,
-            users : []
+            users : [],
+            search:""
         }
     },
     components: {
@@ -64,6 +67,7 @@ export default {
                 points[qno+'l'] = !points[qno+'l']
                 console.log(points)
                 firebaseApp.db.doc("users/"+uid).update({
+                    timestamp: Date.now(),
                     points:points
                 })
             })
@@ -75,11 +79,20 @@ export default {
                 points[qno+'c'] = !points[qno+'c']
                 questions[qno] = !questions[qno]
                 firebaseApp.db.doc("users/"+uid).update({
+                    timestamp: Date.now(),
                     questions:questions,
                     points:points
                 })
             })
-        }
+        },
+        filterItems: function(users) {
+            var app = this;
+            console.log("STUFF")
+            return users.filter(function(user) {
+                let regex = new RegExp('(' + app.search + ')', 'i');
+                return user.name.match(regex);
+            })
+        },
     },
     beforeMount(){
         let scope = this;
@@ -97,6 +110,59 @@ export default {
                 data.pointNumber = points
                 scope.users.push(data)
             });
+            scope.users.sort(
+            function(a, b) {          
+                if (a.pointNumber === b.pointNumber) {
+                    // Price is only important when cities are the same
+                    return b.timestamp - a.timestamp;
+                }
+                return a.pointNumber > b.pointNumber ? 1 : -1;
+            });
+            scope.users = scope.users.reverse()
+            console.log(scope.users)
+            console.log("IGNORE")
+            // let usersSplit = {
+            //     0:[],
+            //     50:[],
+            //     100:[],
+            //     150:[],
+            //     200:[],
+            //     250:[],
+            //     300:[],
+            //     350:[],
+            //     400:[],
+            //     450:[],
+            //     500:[],
+            //     550:[],
+            //     600:[]
+            // }
+            // let arr = []
+            // for(let j=0;j<users.length;j++){
+            //     for(let i=0;i<600;i=i+50){   
+            //         if(users[j].pointNumber == i){
+            //             usersSplit[i].push(users[j])
+            //         }
+                    
+            //     }
+            // }
+            // console.log("SPLIT")
+            // console.log(usersSplit)
+            // let finalUsers = []
+            // Object.keys(usersSplit).forEach(userGroupKey=>{
+            //     if(usersSplit[userGroupKey].length!=0){
+            //         usersSplit[userGroupKey].sort(function(a, b) {
+            //             return a['timestamp'] - b['timestamp'];
+            //         });
+            //         //TRY REVERSING AND SEE WHAT WORKS
+            //         console.log(usersSplit[userGroupKey])
+            //         finalUsers.concat(usersSplit[userGroupKey])
+            //     }
+            // })
+            // scope.users = finalUsers;
+            // console.log(scope.users)
+            // users.forEach(user=>{
+
+            // })
         })
     }
 
@@ -110,6 +176,15 @@ export default {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     padding: 50px;
     text-align: left;
+}
+.roundButton {
+    font-size: 250%;
+    border-radius: 50%;
+    background: black;
+    padding: 20px;
+    display: inline-block;
+    cursor: pointer;
+    line-height: 16px;
 }
 .userCard h1 {
     color: #A32A29;

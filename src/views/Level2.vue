@@ -2,7 +2,7 @@
 <div class="container is-fluid">
     <div class="columns">
         <h1 class="title">
-            LEVEL 2
+            {{ this.userData.name }} : LEVEL 2
         </h1>
     </div>
     <!-- <div class="column">
@@ -46,8 +46,13 @@ export default {
         let uid = localStorage.getItem('uid')
         console.log(uid)
         firebaseApp.db.doc('users/'+uid).onSnapshot(snapshot=>{
+
             this.userData = snapshot.data()
-            if(this.userData.questions['4']){
+            let questions = this.userData.questions
+            if(!questions['1'] || !questions['2'] || !questions['3']){
+                this.$router.push('level1')
+            }
+            if(questions['4']){
                 this.$router.push('level3')
             }
         })
