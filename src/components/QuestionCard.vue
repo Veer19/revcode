@@ -141,11 +141,11 @@ export default {
         for (let i = 0; i < word.length; i++) {
             v = word[i].charCodeAt(0) + ((-1) ** i) * (i + 1);
             if (v > pos_z) {
-                v = v % pos_z + pos_a;
+                v = v % pos_z + pos_a - 1;
                 ans += String.fromCharCode(v);
             }
             else if (v < pos_a) {
-                v = pos_z - (pos_a - v);
+                v = pos_z - (pos_a - v) + 1;
                 ans += String.fromCharCode(v);
             }
             else {
