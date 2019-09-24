@@ -45,6 +45,11 @@ export default {
                 this.$router.push('finish')
             }
         })
+        firebaseApp.db.doc('admin/controls').onSnapshot(snapshot=>{
+            if(!snapshot.data().start){
+                this.$router.push('home')
+            }
+        })
     },
     name: 'level3',
     components: {
