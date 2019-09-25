@@ -2,7 +2,7 @@
 <div class="container is-fluid">
     <div class="columns">
         <h1 class="title">
-            {{ this.userData.name }} : LEVEL 1
+            {{ this.userData.name }} | LEVEL 1 | Score : {{points}}
         </h1>
     </div>
     <!-- <div class="column">
@@ -45,9 +45,9 @@ export default {
             },
             question3 : {
                 number:"Question 3",
-                instruction : "Enter a String"
+                instruction : "Enter a String (No Spaces)"
             },
-            ladderImage:ladderImage
+            points:0
         }
     },
     beforeMount(){
@@ -55,6 +55,12 @@ export default {
         console.log(uid)
         firebaseApp.db.doc('users/'+uid).onSnapshot(snapshot=>{
             this.userData = snapshot.data()
+            let points = 0
+                Object.keys(this.userData.points).forEach(key=>{
+                    if(this.userData.points[key])
+                    points = points + 50
+                })
+            this.points = points
             if(this.userData.questions['1'] && this.userData.questions['2'] && this.userData.questions['3']){
                 this.$router.push('level2')
             }

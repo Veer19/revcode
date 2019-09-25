@@ -15,7 +15,7 @@
         <br>
         <br>
         <div class="columns is-multiline">
-            <div class="column userCard" v-for="(user,index) in filterItems(users)" v-bind:key="user.name" >
+            <div class="column userCard is-one-quarter" v-for="(user,index) in filterItems(users)" v-bind:key="user.name" >
                 <div class="columns is-multiline" >
                     <div class="column is-two-thirds"><h1>{{index + 1}} : {{user.name}}</h1></div>
                     <div class="column"><h1>{{user.pointNumber}}</h1></div>

@@ -2,7 +2,7 @@
 <div class="container">
     <div class="columns">
         <h1 class="title">
-            {{ this.userData.name }} : LEVEL 3
+            {{ this.userData.name }} | LEVEL 3 | Score : {{points}}
         </h1>
     </div>
     <!-- <div class="column">
@@ -30,13 +30,19 @@ export default {
                 number:"Final Question",
                 instruction : "Enter a +ve Integer"
             },
-            ladderImage:ladderImage
+            points:0
         }
     },
     beforeMount(){
         let uid = localStorage.getItem('uid')
         firebaseApp.db.doc('users/'+uid).onSnapshot(snapshot=>{
             this.userData = snapshot.data()
+            let points = 0
+                Object.keys(this.userData.points).forEach(key=>{
+                    if(this.userData.points[key])
+                    points = points + 50
+                })
+            this.points = points
             let questions = this.userData.questions
             if(!questions['1'] || !questions['2'] || !questions['3'] || !questions['4']  ){
                 this.$router.push('level1')
