@@ -56,6 +56,7 @@ export default {
         adminLogin:function(){
             firebaseApp.auth.signInWithEmailAndPassword('admin@gmail.com',this.adminPass)
             .then(user=>{
+                localStorage.setItem('adminLoggedIn',true)
                 this.loggedIn = true;
             })
         },
@@ -96,6 +97,7 @@ export default {
         let scope = this;
         let data;
         let points = 0
+        this.loggedIn = localStorage.getItem('adminLoggedIn')
         firebaseApp.db.collection("users").onSnapshot(snapshot=>{
             scope.users = []
             snapshot.forEach(function(doc) {
